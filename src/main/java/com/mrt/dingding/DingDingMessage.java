@@ -33,7 +33,14 @@ public class DingDingMessage {
     private static String secret = "SEC3ad384f0c7b5f6c5d092daf29377c3b526daf517400481834c9e1da9557f423c";
 
 
-
+    /**
+     * 发送钉钉消息
+     * @param title
+     * @param msg
+     * @throws NoSuchAlgorithmException
+     * @throws UnsupportedEncodingException
+     * @throws InvalidKeyException
+     */
     public static void sendDingdingTalkMessage(String title,String msg) throws NoSuchAlgorithmException, UnsupportedEncodingException, InvalidKeyException {
 
         Long timestamp = System.currentTimeMillis();
