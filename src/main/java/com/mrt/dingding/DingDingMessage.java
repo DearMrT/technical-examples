@@ -23,11 +23,13 @@ import java.security.NoSuchAlgorithmException;
 @Slf4j
 public class DingDingMessage {
     /**
+     *  可以调整为自己地址
      *  钉钉机器人设置时的地址
      */
     private static String url = "https://oapi.dingtalk.com/robot/send?access_token=6ebfe3d9e415b88844136947d33575c655f4ce7dbf7a9fac49f174811a5f965d";
 
     /**
+     *  调整为自己秘钥
      * 秘钥
      */
     private static String secret = "SEC3ad384f0c7b5f6c5d092daf29377c3b526daf517400481834c9e1da9557f423c";
