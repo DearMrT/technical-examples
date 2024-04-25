@@ -99,6 +99,7 @@ public class ImageOrc {
         instance.setLanguage("eng");
         String string = instance.doOCR(new File("E:\\test\\book\\eng.traineddata\\0.png"));
         System.out.println(string);
+        System.out.println("为什么不提交??");
     }
 
 
