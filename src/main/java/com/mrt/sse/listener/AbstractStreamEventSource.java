@@ -26,9 +26,9 @@ public abstract class AbstractStreamEventSource extends EventSourceListener {
 
     @Override
     public void onEvent(@NotNull EventSource eventSource, @Nullable String id, @Nullable String type, @NotNull String data) {
-        if (!completed) {
-            return;
-        }
+        //if (!completed) {
+        //    return;
+        //}
         try {
             handleEvent(type,data);
         } catch (Exception e) {
