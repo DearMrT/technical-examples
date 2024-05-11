@@ -2,8 +2,10 @@ package com.mrt.sse.handler;
 
 import cn.hutool.core.util.StrUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mrt.openai.bean.BaseChatCompletion;
 import com.mrt.openai.bean.ChatChoice;
 import com.mrt.openai.bean.ChatCompletionResponse;
+import com.mrt.openai.util.TikTokensUtil;
 import com.mrt.sse.listener.AbstractStreamEventSource;
 import com.mrt.sse.service.CustomService;
 import lombok.extern.slf4j.Slf4j;
@@ -29,6 +31,8 @@ public class OpenAiStreamEventHandler extends AbstractStreamEventSource {
 
     protected CustomService customService;
 
+    private StringBuilder stringBuilder = new StringBuilder();
+
     public OpenAiStreamEventHandler(SseEmitter sseEmitter, CustomService customService) {
         super(sseEmitter);
         this.customService = customService;
@@ -52,6 +56,7 @@ public class OpenAiStreamEventHandler extends AbstractStreamEventSource {
         String content = choices.get(0).getDelta().getContent();
         log.info("返回的数据为:{}",data);
         sseEmitter.send(content);
+        stringBuilder.append(content);
     }
 
 
@@ -70,6 +75,8 @@ public class OpenAiStreamEventHandler extends AbstractStreamEventSource {
         log.info("连接关闭");
         // 后置业务处理
         customService.handle(new Object());
+        int tokens = TikTokensUtil.tokens(BaseChatCompletion.Model.GPT_3_5_TURBO.getName(), stringBuilder.toString());
+        log.info("消耗的token数量为:{}",tokens);;
     }
 
     @Override
