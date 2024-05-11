@@ -33,7 +33,8 @@ public abstract class AbstractStreamEventSource extends EventSourceListener {
             handleEvent(type,data);
         } catch (Exception e) {
             log.error("业务侧处理数据异常，原因",e);
-            sseEmitter.complete();
+             // 因为 open ai 返回的数据格式 不是标准的，所以不能直接关闭
+            //sseEmitter.complete();
         }
 
     }

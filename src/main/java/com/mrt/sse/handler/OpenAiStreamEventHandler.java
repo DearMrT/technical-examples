@@ -1,5 +1,6 @@
 package com.mrt.sse.handler;
 
+import cn.hutool.core.util.StrUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mrt.openai.bean.ChatChoice;
 import com.mrt.openai.bean.ChatCompletionResponse;
@@ -40,16 +41,16 @@ public class OpenAiStreamEventHandler extends AbstractStreamEventSource {
 
     @Override
     protected void handleEvent(String type, String data) throws Exception {
-        ChatCompletionResponse response = new ObjectMapper().reader().readValue(data);
-        List<ChatChoice> choices = response.getChoices();
-        String content = choices.get(0).getDelta().getContent();
         // 如果是结束符
         if (completed.equals(data)) {
-            sseEmitter.send(SseEmitter.event().name("message").data(content));
+            sseEmitter.send(SseEmitter.event().name("message").data(data));
             sseEmitter.complete();
             return;
         }
-        log.info("返回的数据为:{}",content);
+        ChatCompletionResponse response = new ObjectMapper().reader().readValue(data,ChatCompletionResponse.class);
+        List<ChatChoice> choices = response.getChoices();
+        String content = choices.get(0).getDelta().getContent();
+        log.info("返回的数据为:{}",data);
         sseEmitter.send(content);
     }
 
