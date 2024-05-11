@@ -2,6 +2,7 @@ package com.mrt.openai.bean;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.mrt.openai.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -56,7 +57,7 @@ public class Message extends BaseMessage implements Serializable {
         public Builder() {
         }
 
-        public Builder role(BaseMessage.Role role) {
+        public Builder role(Role role) {
             this.role = role.getName();
             return this;
         }

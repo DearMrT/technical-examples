@@ -25,12 +25,6 @@ public class BaseMessage implements Serializable {
 
     private String name;
 
-
-
-
-
-
-
     /**
      * 构造函数
      *
@@ -46,32 +40,5 @@ public class BaseMessage implements Serializable {
     }
 
 
-    @Getter
-    @AllArgsConstructor
-    public enum Role {
-        /**
-         *  系统
-         */
-        SYSTEM("system"),
-        /**
-         * 用户
-         */
-        USER("user"),
-        /**
-         * 助手
-         */
-        ASSISTANT("assistant"),
-        /**
-         * 好像已经 不支持
-         */
-        @Deprecated
-        FUNCTION("function"),
-        /**
-         * 工具
-         */
-        TOOL("tool"),
-        ;
-        private final String name;
-    }
 
 }

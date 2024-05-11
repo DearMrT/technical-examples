@@ -1,10 +1,9 @@
 package com.mrt.sse.handler;
 
-import cn.hutool.core.util.StrUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mrt.openai.bean.BaseChatCompletion;
 import com.mrt.openai.bean.ChatChoice;
 import com.mrt.openai.bean.ChatCompletionResponse;
+import com.mrt.openai.enums.Model;
 import com.mrt.openai.util.TikTokensUtil;
 import com.mrt.sse.listener.AbstractStreamEventSource;
 import com.mrt.sse.service.CustomService;
@@ -17,7 +16,6 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.concurrent.Exchanger;
 
 /**
  * @Author: Mr.T
@@ -75,7 +73,7 @@ public class OpenAiStreamEventHandler extends AbstractStreamEventSource {
         log.info("连接关闭");
         // 后置业务处理
         customService.handle(new Object());
-        int tokens = TikTokensUtil.tokens(BaseChatCompletion.Model.GPT_3_5_TURBO.getName(), stringBuilder.toString());
+        int tokens = TikTokensUtil.tokens(Model.GPT_3_5_TURBO.getName(), stringBuilder.toString());
         log.info("消耗的token数量为:{}",tokens);;
     }
 

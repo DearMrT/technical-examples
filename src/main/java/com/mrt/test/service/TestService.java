@@ -1,10 +1,10 @@
 package com.mrt.test.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.mrt.openai.bean.BaseMessage;
 import com.mrt.openai.bean.ChatCompletion;
 import com.mrt.openai.bean.Message;
 import com.mrt.openai.common.OpenAiRequestHolder;
+import com.mrt.openai.enums.Role;
 import com.mrt.sse.CustormSseEmitter;
 import com.mrt.sse.handler.OpenAiStreamEventHandler;
 import com.mrt.sse.service.CustomService;
@@ -29,7 +29,7 @@ public class TestService implements CustomService {
 
 
     public SseEmitter chat(String data) throws JsonProcessingException {
-        Message message = Message.builder().role(BaseMessage.Role.USER).content(data).build();
+        Message message = Message.builder().role(Role.USER).content(data).build();
 
         List<Message> messages = new ArrayList<>();
         // AI 角色设定
