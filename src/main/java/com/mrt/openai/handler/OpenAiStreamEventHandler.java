@@ -1,4 +1,4 @@
-package com.mrt.sse.handler;
+package com.mrt.openai.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mrt.openai.bean.ChatChoice;
@@ -77,8 +77,5 @@ public class OpenAiStreamEventHandler extends AbstractStreamEventSource {
         log.info("消耗的token数量为:{}",tokens);;
     }
 
-    @Override
-    public void onOpen(@NotNull EventSource eventSource, @NotNull Response response) {
-        log.info("打开连接");
-    }
+
 }

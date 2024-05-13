@@ -1,15 +1,15 @@
 package com.mrt.test.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.mrt.gml.GmlAiClient;
+import com.mrt.gml.service.GmlAiClient;
 import com.mrt.openai.bean.ChatCompletion;
 import com.mrt.openai.bean.Message;
 import com.mrt.openai.common.OpenAiRequestHolder;
 import com.mrt.openai.enums.Role;
 import com.mrt.sse.CustormSseEmitter;
-import com.mrt.sse.handler.OpenAiStreamEventHandler;
+import com.mrt.openai.handler.OpenAiStreamEventHandler;
 import com.mrt.sse.service.CustomService;
-import com.mrt.sse.OpenAiClient;
+import com.mrt.openai.service.OpenAiClient;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 

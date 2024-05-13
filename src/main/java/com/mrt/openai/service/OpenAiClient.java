@@ -1,4 +1,4 @@
-package com.mrt.gml;
+package com.mrt.openai.service;
 
 import cn.hutool.http.ContentType;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -11,26 +11,26 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.sse.EventSources;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.Objects;
 
 /**
  * @Author: Mr.T
- * @Date: 2024/5/13
+ * @Date: 2024/5/11
  */
-@Service
 @Slf4j
-public class GmlAiClient {
+@Component
+public class OpenAiClient {
 
-
-    private  String apiHost = "https://open.bigmodel.cn/api/paas/v4/chat/completions";
+    private  String apiHost = "https://api.openai.one/";
 
     @Resource
     private OkHttpClient okHttpClient;
 
-    public   <T extends BaseChatCompletion> void chatGmlStreamChatCompletion(OpenAiRequestHolder holder) {
+
+    public   <T extends BaseChatCompletion> void openAiStreamChatCompletion(OpenAiRequestHolder holder) {
         if (Objects.isNull(holder.getStreamEventSource())) {
             log.error("参数异常：EventSourceListener不能为空，可以参考：com.unfbx.chatgpt.sse.ConsoleEventSourceListener");
             throw new RuntimeException("参数异常：EventSourceListener不能为空，可以参考：com.unfbx.chatgpt.sse.ConsoleEventSourceListener");
@@ -43,7 +43,7 @@ public class GmlAiClient {
             String requestBody = mapper.writeValueAsString(holder.getChatCompletion());
             log.info("请求数据为:{}",requestBody);
             Request request = new Request.Builder()
-                    .url(apiHost)
+                    .url(apiHost + "v1/chat/completions")
                     .addHeader("Authorization",holder.getKey())
                     .post(RequestBody.create(MediaType.parse(ContentType.JSON.getValue()), requestBody))
                     .build();
