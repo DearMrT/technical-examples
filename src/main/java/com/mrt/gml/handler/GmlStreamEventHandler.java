@@ -1,6 +1,7 @@
 package com.mrt.gml.handler;
 
 import com.mrt.sse.listener.AbstractStreamEventSource;
+import com.mrt.sse.service.CustomService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
@@ -11,7 +12,21 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
  */
 @Slf4j
 public class GmlStreamEventHandler  extends AbstractStreamEventSource {
+
+    protected CustomService customService;
+
+    private StringBuilder stringBuilder = new StringBuilder();
+
     public GmlStreamEventHandler(SseEmitter sseEmitter) {
         super(sseEmitter);
     }
+
+
+
+
+    public GmlStreamEventHandler(SseEmitter sseEmitter, CustomService customService) {
+        super(sseEmitter);
+        this.customService = customService;
+    }
+
 }

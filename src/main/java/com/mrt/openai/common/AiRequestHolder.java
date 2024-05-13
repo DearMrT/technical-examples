@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class OpenAiRequestHolder {
+public class AiRequestHolder {
 
     private BaseChatCompletion chatCompletion;
 

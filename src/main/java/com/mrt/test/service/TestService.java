@@ -1,10 +1,12 @@
 package com.mrt.test.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.mrt.gml.handler.GmlStreamEventHandler;
 import com.mrt.gml.service.GmlAiClient;
 import com.mrt.openai.bean.ChatCompletion;
 import com.mrt.openai.bean.Message;
-import com.mrt.openai.common.OpenAiRequestHolder;
+import com.mrt.openai.common.AiRequestHolder;
+import com.mrt.openai.common.AiRequestHolder;
 import com.mrt.openai.enums.Role;
 import com.mrt.sse.CustormSseEmitter;
 import com.mrt.openai.handler.OpenAiStreamEventHandler;
@@ -53,9 +55,9 @@ public class TestService implements CustomService {
                 .build();
         // 3分钟超时
         SseEmitter sseEmitter = new CustormSseEmitter(180 * 1000L);
-        OpenAiStreamEventHandler streamEventHandler = new OpenAiStreamEventHandler(sseEmitter, this);
+        GmlStreamEventHandler streamEventHandler = new GmlStreamEventHandler(sseEmitter, this);
         // 封装成包装对象 这样便于程序进行扩展
-        OpenAiRequestHolder holder = new OpenAiRequestHolder(chatCompletion,streamEventHandler,"Bearer 2d1c6dabcee934dd3a5177b19e995c20.5lQ1zndAv6LoMFAS");
+        AiRequestHolder holder = new AiRequestHolder(chatCompletion,streamEventHandler,"Bearer 2d1c6dabcee934dd3a5177b19e995c20.5lQ1zndAv6LoMFAS");
         gmlAiClient.chatGmlStreamChatCompletion(holder);
         return sseEmitter;
     }

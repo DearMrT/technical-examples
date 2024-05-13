@@ -4,7 +4,7 @@ import cn.hutool.http.ContentType;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mrt.openai.bean.BaseChatCompletion;
-import com.mrt.openai.common.OpenAiRequestHolder;
+import com.mrt.openai.common.AiRequestHolder;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -30,7 +30,7 @@ public class OpenAiClient {
     private OkHttpClient okHttpClient;
 
 
-    public   <T extends BaseChatCompletion> void openAiStreamChatCompletion(OpenAiRequestHolder holder) {
+    public   <T extends BaseChatCompletion> void openAiStreamChatCompletion(AiRequestHolder holder) {
         if (Objects.isNull(holder.getStreamEventSource())) {
             log.error("参数异常：EventSourceListener不能为空，可以参考：com.unfbx.chatgpt.sse.ConsoleEventSourceListener");
             throw new RuntimeException("参数异常：EventSourceListener不能为空，可以参考：com.unfbx.chatgpt.sse.ConsoleEventSourceListener");
