@@ -46,9 +46,9 @@ public class BaseChatCompletion implements Serializable {
      * <p>
      * 我们通常建议更改此设置，但不要同时更改两者。temperature
      */
-    @JsonProperty("top_p")
+ /*   @JsonProperty("top_p")
     @Builder.Default
-    private Double topP = 1d;
+    private Double topP = 1d;*/
 
 
     /**

@@ -1,6 +1,7 @@
 package com.mrt.test.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.mrt.gml.GmlAiClient;
 import com.mrt.openai.bean.ChatCompletion;
 import com.mrt.openai.bean.Message;
 import com.mrt.openai.common.OpenAiRequestHolder;
@@ -27,6 +28,9 @@ public class TestService implements CustomService {
     @Resource
     private OpenAiClient openAiClient;
 
+    @Resource
+    private GmlAiClient gmlAiClient;
+
 
     public SseEmitter chat(String data) throws JsonProcessingException {
         Message message = Message.builder().role(Role.USER).content(data).build();
@@ -34,9 +38,16 @@ public class TestService implements CustomService {
         List<Message> messages = new ArrayList<>();
         // AI 角色设定
         messages.add(message);
+        //ChatCompletion chatCompletion = ChatCompletion.builder()
+        //        .stream(Boolean.TRUE)
+        //        .model("gpt-3.5-turbo")
+        //        .messages(messages)
+        //        .temperature(0.2)
+        //        .build();
+
         ChatCompletion chatCompletion = ChatCompletion.builder()
                 .stream(Boolean.TRUE)
-                .model("gpt-3.5-turbo")
+                .model("glm-4")
                 .messages(messages)
                 .temperature(0.2)
                 .build();
@@ -44,8 +55,8 @@ public class TestService implements CustomService {
         SseEmitter sseEmitter = new CustormSseEmitter(180 * 1000L);
         OpenAiStreamEventHandler streamEventHandler = new OpenAiStreamEventHandler(sseEmitter, this);
         // 封装成包装对象 这样便于程序进行扩展
-        OpenAiRequestHolder holder = new OpenAiRequestHolder(chatCompletion,streamEventHandler,"Bearer sk-636dfa1ac633b5a71a48c3c17a5707133bf62b035d324b1e");
-        openAiClient.openAiStreamChatCompletion(holder);
+        OpenAiRequestHolder holder = new OpenAiRequestHolder(chatCompletion,streamEventHandler,"Bearer 2d1c6dabcee934dd3a5177b19e995c20.5lQ1zndAv6LoMFAS");
+        gmlAiClient.chatGmlStreamChatCompletion(holder);
         return sseEmitter;
     }
 
